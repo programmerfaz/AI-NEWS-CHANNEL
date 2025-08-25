@@ -1,7 +1,10 @@
 import { Clock, TrendingUp, ExternalLink, Tag } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
-const NewsCard = ({ article, onClick }) => {
+const NewsCard = ({ article }) => {
+  const navigate = useNavigate();
+
   const getCategoryColor = (category) => {
     const colors = {
       'ML Models': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
@@ -14,10 +17,14 @@ const NewsCard = ({ article, onClick }) => {
     return colors[category] || 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
   };
 
+  const handleClick = () => {
+    navigate(`/article/${article.url}`);
+  };
+
   return (
     <article 
       className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-200 cursor-pointer group"
-      onClick={() => onClick(article)}
+      onClick={handleClick}
     >
       <div className="p-6">
         {/* Header */}
@@ -42,7 +49,7 @@ const NewsCard = ({ article, onClick }) => {
         </h2>
 
         {/* Summary */}
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-2">
           {article.summary}
         </p>
 

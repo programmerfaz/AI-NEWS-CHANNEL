@@ -17,7 +17,8 @@ export const useNews = () => {
       const processedNews = newNews.map((item, index) => ({
         ...item,
         id: Date.now() + index,
-        timestamp: item.timestamp || new Date().toISOString()
+        timestamp: item.timestamp || new Date().toISOString(),
+        url: item.url || `article-${Date.now()}-${index}`
       }));
       
       setNews(prevNews => {

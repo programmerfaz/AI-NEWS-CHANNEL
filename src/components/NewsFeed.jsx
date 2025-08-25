@@ -1,12 +1,9 @@
 import { useState, useMemo } from 'react';
 import NewsCard from './NewsCard';
-import NewsModal from './NewsModal';
 import LoadingSpinner from './LoadingSpinner';
 import { TrendingUp, Newspaper, AlertCircle } from 'lucide-react';
 
 const NewsFeed = ({ news, loading, error, searchTerm, selectedCategory }) => {
-  const [selectedArticle, setSelectedArticle] = useState(null);
-
   const filteredNews = useMemo(() => {
     let filtered = news;
 
@@ -87,7 +84,6 @@ const NewsFeed = ({ news, loading, error, searchTerm, selectedCategory }) => {
               <NewsCard
                 key={article.id}
                 article={article}
-                onClick={setSelectedArticle}
               />
             ))}
           </div>
@@ -110,7 +106,6 @@ const NewsFeed = ({ news, loading, error, searchTerm, selectedCategory }) => {
             <NewsCard
               key={article.id}
               article={article}
-              onClick={setSelectedArticle}
             />
           ))}
         </div>
@@ -124,14 +119,6 @@ const NewsFeed = ({ news, loading, error, searchTerm, selectedCategory }) => {
             Loading new content...
           </span>
         </div>
-      )}
-
-      {/* News Modal */}
-      {selectedArticle && (
-        <NewsModal
-          article={selectedArticle}
-          onClose={() => setSelectedArticle(null)}
-        />
       )}
     </div>
   );
